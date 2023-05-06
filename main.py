@@ -1,4 +1,5 @@
 import pygame.draw
+import asyncio
 
 from button import Button, CustomButton
 from courier import Courier
@@ -395,9 +396,9 @@ class Game:
         self.floaters = []
 
         self.reset()
-        self.run()
+        asyncio.run(self.run())
 
-    def run(self):
+    async def run(self):
         """ Iteratively call update """
         clock = pygame.time.Clock()
         self.pause = False
@@ -413,6 +414,7 @@ class Game:
             dt = clock.tick(TIME_STEP)
             self.update(dt, pygame.key.get_pressed())
             pygame.display.update()
+            await asyncio.sleep(0)
 
 
 if __name__ == '__main__':
